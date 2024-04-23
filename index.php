@@ -12,8 +12,8 @@
   <main class="main">
     <div class="container">
       <?php
-        if (isset($_POST["page"])) {
-          switch ($_POST["page"]) {
+        if (isset($_GET["page"])) {
+          switch ($_GET["page"]) {
             case "start":
               require "start.php";
               break;

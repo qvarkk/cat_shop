@@ -14,8 +14,8 @@ body {
 
 .header {
   max-height: 80px;
-  background-color: #eeeeee;
-  box-shadow: 0 5px 5px 5px #00000010;
+  background-color: #c2c2c2;
+  box-shadow: 0 5px 10px 5px #00000050;
   padding: 10px 75px;
   display: flex;
   justify-content: space-between;
@@ -40,6 +40,8 @@ body {
   margin: 0 40px;
   width: 100%;
   max-width: 1250px;
+  display: flex;
+  justify-content: center;
 }
 
 .footer {

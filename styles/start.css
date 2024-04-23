@@ -24,3 +24,9 @@
   text-align: center;
   padding: 20px;
 }
+
+.profile-image {  
+  height: 100%;
+  width: 100%;  
+  object-fit: cover;
+}
