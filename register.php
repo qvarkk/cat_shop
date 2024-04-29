@@ -7,7 +7,6 @@
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["username"])) {
-      $_SESSION["username"] = $_POST["username"];
       setcookie("username", $_POST["username"], time() + 3600);
     }
 
@@ -50,6 +49,7 @@
 ?>
 
 <link rel="stylesheet" href="styles/register.css">
+<script src="js/register.js" defer></script>
 
 <form method="POST" enctype="multipart/form-data" class="reg-form">
   <p class="reg-title">Register</p>
@@ -68,4 +68,5 @@
     <input type="file" name="profile_image" accept=".png,.jpeg,.jpg,.webp">
   </div>
   <input type="submit" value="Register">
+  <p>Already registered? <span class="reg-href" id="loginBtn"> Login here</span></p>
 </form>

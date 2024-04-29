@@ -1,0 +1,26 @@
+.login-form {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.login-form > input {
+  width: 100%;
+  line-height: 24px;
+  padding: 3px 5px;
+}
+
+.login-href {
+  color: blue;
+  cursor: pointer;
+}

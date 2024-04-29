@@ -16,18 +16,25 @@
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["username"])) {
-      setcookie("username", $_POST["username"], time() + 3600);
-      $_SESSION["username"] = $_POST["username"];
-    }
+    if (isset($_POST["username"]) && isset($_POST["password"])) {
+      
+      if ($_POST["username"] == "admin" &&
+          $_POST["password"] == "admin") {
 
-    if (isset($_POST["password"])) {
-      setcookie("password", $_POST["password"], time() + 3600);
-    }
+        setcookie("username", $_POST["username"], time() + 3600);
+        $_SESSION["username"] = $_POST["username"];
+        setcookie("password", $_POST["password"], time() + 3600);
 
-    $_SESSION["message"] = "Logged in";
-    header("Location: index.php?page=profile");
-    die();
+        $_SESSION["message"] = "Logged in";
+        header("Location: index.php?page=profile");
+        die();
+
+      } else {
+        $_SESSION["message"] = "Wrong credentials";
+        header("Location: index.php?page=login");
+        die();
+      }
+    }
   }
 
   $username = "";
@@ -43,17 +50,13 @@
 ?>
 
 <link rel="stylesheet" href="styles/login.css">
+<script src="js/login.js" defer></script>
 
-<form method="POST" enctype="multipart/form-data">
-  <input type="text" placeholder="Username" value="<? echo($username) ?>" required>
-  <input type="password" placeholder="Password" value="<? echo($password) ?>" required>
+<form method="POST" class="login-form" enctype="multipart/form-data">
+  <p class="login-title">Login</p>
+  <input type="text" name="username" placeholder="Username" value="<? echo($username) ?>" required>
+  <input type="password" name="password" placeholder="Password" value="<? echo($password) ?>" required>
   <input type="submit" value="Login">
-</form>
-
-<form method="GET" action="index.php?page=register">
-  <input type="submit" value="Register">
-</form>
-
-<form method="GET" action="index.php?page=login&action=logout">
-  <input type="submit" value="Logout">
+  <input type="button" id="logoutBtn" value="Logout">
+  <p>Don't have an account yet? <span class="login-href" id="regBtn"> Register here</span></p>
 </form>

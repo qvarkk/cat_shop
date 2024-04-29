@@ -26,3 +26,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.reg-href {
+  color: blue;
+  cursor: pointer;
+}
