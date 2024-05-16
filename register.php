@@ -1,4 +1,7 @@
 <?php
+
+  require("dbconn.php");
+
   if (isset($_SESSION["username"])) {
     $_SESSION["message"] = "Already logged in";
     header("Location: index.php?page=start");
@@ -6,15 +9,8 @@
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["username"])) {
-      setcookie("username", $_POST["username"], time() + 3600);
-    }
+    if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["email"]) && isset($_POST["gender"]) && isset($_FILES["profile_image"])) {
 
-    if (isset($_POST["password"])) {
-      setcookie("password", $_POST["password"], time() + 3600);
-    }
-
-    if (isset($_FILES["profile_image"])) {
       $uploadDir = "uploads/";
       $uploadFile = $uploadDir.basename($_FILES["profile_image"]["name"]);
 
@@ -22,30 +18,34 @@
         setcookie("profile_image", $uploadFile, time() + 3600);
       } else {
         echo "Error loading file to server";
+        die();
       }
-    }    
 
-    $_SESSION["message"] = "Registered";
-    header("Location: index.php?page=start");
-    die();
+      $id_q = $conn->query("SELECT MAX(id) FROM paws.users");
+      $id = $id_q->fetch();
+      $query = $conn->prepare("INSERT INTO paws.users (id, username, email, gender, password, image) VALUES (".($id["max"] + 1).", '".$_POST["username"]."', '".$_POST["email"]."', '".$_POST["gender"]."', '".md5($_POST["password"])."', '".$uploadFile."');");
+      
+      if ($query->execute()) {
+        $_SESSION["message"] = "Registered";
+        header("Location: index.php?page=start");
+        die();
+      } else {
+        $_SESSION["message"] = "This username is already in use";
+        header("Location: index.php?page=register");
+        die();
+      }
+    } else {
+      $_SESSION["message"] = "Some internal error occured";
+        header("Location: index.php?page=register");
+        die();
+    }
   }
 
   $username = "";
-  $password = "";
-  $profile_image = "";
 
   if (isset($_COOKIE["username"])) {
     $username = $_COOKIE["username"];
   }
-
-  if (isset($_COOKIE["password"])) {
-    $password = $_COOKIE["password"];
-  }
-
-  if (isset($_COOKIE["profile_image"])) {
-    $profile_image = $_COOKIE["profile_image"];
-  }
-
 ?>
 
 <link rel="stylesheet" href="styles/register.css">
@@ -54,8 +54,8 @@
 <form method="POST" enctype="multipart/form-data" class="reg-form">
   <p class="reg-title">Register</p>
   <input type="text" placeholder="Username" name="username" value="<? echo($username) ?>" required>
-  <input type="number" placeholder="Phone number" name="phone_num" value="<? echo($phone_num) ?>" required>
-  <input type="password" placeholder="Password" name="password" value="<? echo($password) ?>" required>
+  <input type="email" placeholder="Email" name="email" required>
+  <input type="password" placeholder="Password" name="password" required>
   <select name="gender" required>
     <option value="" disabled selected>Select gender</option>
     <option value="male">Male</option>

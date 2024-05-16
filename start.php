@@ -4,8 +4,8 @@
   <div class="items">
     <div class="item">
       <?
-      if (isset($_COOKIE["profile_image"]))
-        echo('<img class="profile-image" src="'.$_COOKIE["profile_image"].'">');
+      if (isset($_SESSION["profile_image"]))
+        echo('<img class="profile-image" src="'.$_SESSION["profile_image"].'">');
       else
         echo("<p>Cat Shop!</p>");
       ?>
@@ -20,9 +20,6 @@
     </div>
     <div class="item">
       <?
-      if (isset($_SESSION["message"]))
-        echo("<p>".$_SESSION["message"]."</p>");
-      else
         echo("<p>Meow meow meow</p>");
       ?>
     </div>
