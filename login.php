@@ -57,6 +57,5 @@
   <input type="text" name="username" placeholder="Username" value="<? echo($username) ?>" required>
   <input type="password" name="password" placeholder="Password" required>
   <input type="submit" value="Login">
-  <input type="button" id="logoutBtn" value="Logout">
-  <p>Don't have an account yet? <span class="login-href" id="regBtn"> Register here</span></p>
+  <p>Don't have an account yet? <a class="login-href" id="regBtn" href="index.php?page=register"> Register here</a></p>
 </form>

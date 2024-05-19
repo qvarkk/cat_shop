@@ -14,7 +14,6 @@ body {
 
 a {
   text-decoration: none;
-  color: #000;
 }
 
 .header {
@@ -26,6 +25,10 @@ a {
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+
+.header > a {
+  color: #000000;
 }
 
 .message-modulo {
@@ -53,6 +56,7 @@ a {
   display: flex;
   gap: 20px;
   justify-content: center;
+  align-items: center;
 }
 
 .inactive {
@@ -82,4 +86,10 @@ a {
   padding: 5px 0;
   background-color: #eeeeee;
   box-shadow: 0 -5px 5px 5px #00000010;
+}
+
+@media (max-width: 634px) {
+  .header {
+    flex-direction: column;
+  }
 }

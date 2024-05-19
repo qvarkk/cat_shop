@@ -26,9 +26,6 @@
             case "profile":
               require "profile.php";
               break;
-            case "cart":
-              require "cart.php";
-              break;
           }
         } else {
           require "start.php";

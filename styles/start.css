@@ -14,19 +14,31 @@
   flex-wrap: wrap;
   flex: 2 1 auto;
   gap: 50px;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .item {
-  height: 160px;
+  height: 360px;
   width: 240px;
   background-color: #acacac;
+  border: 2px solid #696969;
+  border-radius: 25px;
   text-align: center;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 15px 0;
+  gap: 5px;
 }
 
-.profile-image {  
+.image-contaner {
+  height: 240px;
+  width: 240px;
+  border-radius: 25px;
+}
+
+.item-image {  
+  border-radius: 25px;  
   height: 100%;
   width: 100%;  
-  object-fit: cover;
+  object-fit: contain;
 }

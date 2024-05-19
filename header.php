@@ -18,8 +18,8 @@
 <header class="header">
   <a href="index.php"><h1>CAT SHOP</h1></a>
   <nav class="header-nav">
-    <a href="index.php?page=login"><img src="img/profile.svg" alt="Profile" class="profile"></a>
-    <img src="img/cart.svg" alt="Cart" class="cart">
+    <h2><? if (isset($_SESSION["username"])) { echo($_SESSION["username"]); } else { echo("Login"); } ?></h2>
+    <a href="index.php?page=<? if (isset($_SESSION["username"])) { echo("profile"); } else { echo("login"); } ?>"><img src="img/profile.svg" alt="Profile" class="profile"></a>
   </nav>
 
   <div id="msg" class="message-modulo <? echo $active ?>">
